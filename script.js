@@ -102,18 +102,62 @@ function piuUsato(testo) {
   }
   return `${maxOccorrenze[0]} con ${maxOccorrenze[1]} occorrenze`;
 }
-console.log(`ESERCIZIO 9: EPICODE => ${piuUsato("EPICODE")}`);
+console.log(`ESERCIZIO EXTRA 1: EPICODE => ${piuUsato("EPICODE")}`);
 
 // 2. Controlla che due stringhe passate come parametri siano gli anagrammi l’una dell’altra. Ignora punteggiatura e spazi e ricordate di rendere la stringa tutta in minuscolo. Se le due parole sono anagrammi, ritorna `true`, altrimenti ritorna `false`.
+function anagramma(p1, p2) {
+  let parola1 = Array.from(p1.toLowerCase()).sort().toString();
+  let parola2 = Array.from(p2.toLowerCase()).sort().toString();
+  return parola1 === parola2;
+}
+console.log(
+  `ESERCIZIO EXTRA 2: EpIcOdE eDoCiPe => ${anagramma("EpIcOdE", "eDoCiPe")}`
+);
+console.log(`ESERCIZIO EXTRA 2: Google Bing => ${anagramma("Google", "Bing")}`);
 
 /*
-    3. Partendo da una lista di possibili anagrammi e da una parola (entrambi passati come parametri), ritorna un nuovo array contenente tutti gli anagrammi corretti della parola data.
-    Per esempio, partendo da “cartine” e [”carenti”, “incerta”, “espatrio”], il valore ritornato deve essere [”carenti”, “incerta”].
+3. Partendo da una lista di possibili anagrammi e da una parola (entrambi passati come parametri), ritorna un nuovo array contenente tutti gli anagrammi corretti della parola data.
+Per esempio, partendo da “cartine” e [”carenti”, “incerta”, “espatrio”], il valore ritornato deve essere [”carenti”, “incerta”].
 */
+function anagrammi(parola, anagrammi) {
+  let anagrammiCorretti = [];
+  anagrammi.forEach((verifica) => {
+    if (anagramma(parola, verifica))
+      anagrammiCorretti.push(verifica.toLowerCase());
+  });
+  return anagrammiCorretti;
+}
+console.log(
+  `ESERCIZIO EXTRA 3: Google => ${anagrammi("Google", [
+    "Bing",
+    "lgEoog",
+    "legogo",
+    "oglego",
+    "Yahoo",
+  ])}`
+);
+console.log(
+  `ESERCIZIO EXTRA 3: cartine => ${anagrammi("cartine", [
+    "carenti",
+    "incerta",
+    "espatrio",
+  ])}`
+);
 
 // 4. Partendo da una stringa passata come parametro, ritorna `true` se la stringa è palindroma o `false` se non lo è.
+function palindromo(testo) {
+  testo = Array.from(testo.toLowerCase());
+  let testoInverso = testo.reverse();
+  return testo.toString() === testoInverso.toString();
+}
+console.log(`ESERCIZIO EXTRA 4: radar => ${palindromo("radar")}`);
 
 // 5. Partendo da un numero intero (dai parametri) ritorna un numero che contenga le stesse cifre, ma in ordine contrario. Es. 189 ⇒ 981
+function contrarioNumerico(n) {
+  let num = Array.from(n.toString()).reverse();
+  return parseInt(num.join(""));
+}
+console.log(`ESERCIZIO EXTRA 5: 528 => ${contrarioNumerico(528)}`);
 
 /*
     6. Scrivi una funzione che accetti un numero positivo X come parametro. La funzione dovrebbe stampare a console una “scala” creata con il carattere “#” e avente X scalini.
@@ -126,15 +170,38 @@ console.log(`ESERCIZIO 9: EPICODE => ${piuUsato("EPICODE")}`);
     '## '
     '###'
     */
+function scala(n) {
+  let scalini = "\n";
+  let sharp = "#";
+  for (let i = 1; i <= n; i++) {
+    scalini += sharp.repeat(i) + "\n";
+  }
+  return scalini;
+}
+console.log(`ESERCIZIO EXTRA 6:${scala(5)}`);
 
 // 7. Crea una funzione che, data una stringa come parametro, ritorni la stessa stringa, ma al contrario. Es. “Ciao” ****⇒ “oaiC”
+function contrarioTestuale(s) {
+  let testo = Array.from(s.toString()).reverse();
+  return testo.join("");
+}
+console.log(`ESERCIZIO EXTRA 7: Ciao => ${contrarioTestuale("Ciao")}`);
 
 /*
     8. Crea una funzione che accetti un array e un numero Y come parametro. Dividi l’array in sotto-array aventi lunghezza Y.
     Es. array: [1, 2, 3, 4], y: 2 ⇒ [[ 1, 2], [3, 4]]
     array: [1, 2, 3, 4, 5], y: 4 ⇒ [[ 1, 2, 3, 4], [5]]
-    
 */
+function spaccArray(a, y) {
+  let parte1 = a.slice(0, y);
+  let parte2 = a.slice(y);
+  console.log(parte1);
+  console.log(parte2);
+  return `parte 1: ${parte1} | parte2: ${parte2}`;
+}
+console.log(
+  `ESERCIZIO EXTRA 8: [1, 2, 3, 4, 5], 4 => ${spaccArray([1, 2, 3, 4, 5], 4)}`
+);
 
 /*  9. Scrivi una funzione che accetti un numero positivo X come parametro. La funzione dovrebbe stampare a console una “piramide” create con il carattere “#” e avente X strati.
     Es.
@@ -143,6 +210,29 @@ console.log(`ESERCIZIO 9: EPICODE => ${piuUsato("EPICODE")}`);
     ' ### '
     '#####'
 */
+// function scala(n) {
+//   let scalini = "\n";
+//   let sharp = "#";
+//   for (let i = 1; i <= n; i++) {
+//     scalini += sharp.repeat(i) + "\n";
+//   }
+//   return scalini;
+// }
+// console.log(`ESERCIZIO EXTRA 6:${scala(5)}`);
+function piramide(x) {
+  let scalini = "\n";
+  let sharp = "#";
+  let spacer = " ";
+  let i = 1;
+  while (i <= x) {
+    i === 1
+      ? (scalini += spacer.repeat(x - i) + sharp.repeat(i) + "\n")
+      : (scalini += spacer.repeat(x - i) + sharp.repeat(i * 2 - 1) + "\n");
+    i++;
+  }
+  return scalini;
+}
+console.log(`ESERCIZIO EXTRA 9: ${piramide(1)}`);
 
 /*
     10. Scrivi una funzione che accetti un intero N e ritorni una matrice a spirale NxN:
